@@ -1,0 +1,131 @@
+<app-shell>
+  <div id="home-view">
+
+    <!-- Section 0: Danh mục sản phẩm -->
+    <section class="xanhla-sec" id="categories">
+      <div class="xanhla-container">
+        <div class="xanhla-sec-header-center">
+          <h2 class="xanhla-sec-title">Danh mục sản phẩm</h2>
+          <p class="xanhla-sec-desc">Khám phá các loại thực phẩm tươi sống và nguyên liệu chưa chế biến chất lượng cao nhất từ trang trại Xanh Lá.</p>
+        </div>
+        <div class="xanhla-category-grid">
+          @for (cat of categories; track cat.name) {
+            <a class="xanhla-cat-card" [routerLink]="cat.slug">
+              <div class="xanhla-cat-img"><img [src]="cat.image" [alt]="cat.name" /></div>
+              <h5>{{ cat.name }}</h5>
+            </a>
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 1: Sản phẩm tiêu biểu -->
+    <section class="xanhla-sec" id="featured" style="padding-top:0">
+      <div class="xanhla-container">
+        <div class="xanhla-sec-header-between">
+          <div><h2 class="xanhla-sec-title">Sản phẩm tiêu biểu</h2></div>
+          <div style="display:flex;align-items:center;gap:16px">
+            <a class="xanhla-btn-outline" routerLink="/category/all-products">
+              Khám phá tất cả
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <div class="xanhla-carousel-nav">
+              <button class="xanhla-carousel-btn" type="button" aria-label="Trước" [disabled]="carouselStart() === 0" (click)="prevSlide()">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button class="xanhla-carousel-btn" type="button" aria-label="Tiếp theo" [disabled]="carouselStart() === maxStart" (click)="nextSlide()">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="xanhla-carousel-wrap">
+          <div class="xanhla-carousel-track" [style.transform]="carouselTransform">
+            @for (prod of products; track prod.id) {
+              <a class="xanhla-prod-card" [routerLink]="prod.slug">
+                <div class="xanhla-prod-card-img"><img [src]="prod.image" [alt]="prod.name" /></div>
+                <div class="xanhla-prod-card-body">
+                  <div class="xanhla-prod-card-name">{{ prod.name }}</div>
+                  <div class="xanhla-prod-card-price">Giá {{ prod.price }}</div>
+                </div>
+              </a>
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Nguồn gốc thực phẩm sạch -->
+    <section class="xanhla-sec" id="origin" style="background-color:#ffffff">
+      <div class="xanhla-container">
+        <div class="xanhla-origin-grid">
+          <div class="xanhla-origin-img">
+            <img [src]="originImage" alt="Thu hoạch thực phẩm tươi sạch tại trang trại Xanh Lá" />
+          </div>
+          <div class="xanhla-origin-content">
+            <h2>Nguồn gốc thực phẩm sạch</h2>
+            <p>Tại Xanh Lá, chúng tôi tin rằng thực phẩm không chỉ là nguồn dinh dưỡng, mà còn là câu chuyện về sự trân trọng và sự sống. Chúng tôi kết nối bạn với những nguyên liệu tươi sống, được nuôi dưỡng bằng phương pháp canh tác hữu cơ và bền vững.</p>
+            <a class="xanhla-btn-secondary" routerLink="/menus">Tìm hiểu thêm</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Ăn gì theo mục tiêu? -->
+    <section class="xanhla-sec" id="meals">
+      <div class="xanhla-container">
+        <div class="xanhla-sec-header-center">
+          <h2 class="xanhla-sec-title">Ăn gì theo mục tiêu?</h2>
+          <p class="xanhla-sec-desc">Chọn nguyên liệu phù hợp với nhu cầu của bạn, hoặc để chúng tôi giúp bạn lên món từ những gì đang có trong tủ lạnh.</p>
+        </div>
+        <div class="xanhla-meal-grid">
+          @for (meal of meals; track meal.name) {
+            <a class="xanhla-meal-card" routerLink="/menus">
+              <div class="xanhla-meal-img"><img [src]="meal.image" [alt]="meal.name" /></div>
+              <div class="xanhla-meal-body">
+                <h5>{{ meal.name }}</h5>
+                <p>{{ meal.nutrition }}</p>
+              </div>
+            </a>
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Hero Banner -->
+    <section class="xanhla-hero-banner" id="hero">
+      <img class="xanhla-hero-bg" [src]="heroImage" alt="Rau củ hữu cơ Xanh Lá" />
+      <div class="xanhla-hero-overlay"></div>
+      <div class="xanhla-hero-content">
+        <h1>Xanh Lá</h1>
+        <p>Thực phẩm tươi cho những bữa ăn tốt hơn. Chọn nguyên liệu phù hợp với nhu cầu của bạn, hoặc để chúng tôi giúp bạn lên món từ những gì đang có trong tủ lạnh.</p>
+        <div class="xanhla-hero-actions">
+          <a class="xanhla-btn-primary" routerLink="/category/all-products">Khám phá thực phẩm</a>
+          <a class="xanhla-btn-light" routerLink="/menus">Tìm món ăn phù hợp</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Nutrition Intelligence -->
+    <section class="xanhla-sec" id="nutrition">
+      <div class="xanhla-container">
+        <div class="xanhla-sec-header-center">
+          <h2 class="xanhla-sec-title">Nutrition Intelligence</h2>
+          <p class="xanhla-sec-desc">Chọn nguyên liệu phù hợp với nhu cầu dinh dưỡng của bạn.</p>
+        </div>
+        <div class="xanhla-nutrition-grid">
+          @for (goal of nutritionGoals; track goal.name) {
+            <a class="xanhla-nutrition-card" routerLink="/category/all-products">
+              <img [src]="goal.image" [alt]="goal.name" />
+              <div class="xanhla-nutrition-card-overlay"><h5>{{ goal.name }}</h5></div>
+            </a>
+          }
+        </div>
+        <div class="xanhla-nutrition-cta">
+          <a class="xanhla-btn-primary" routerLink="/category/all-products">Khám phá thực phẩm</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</app-shell>

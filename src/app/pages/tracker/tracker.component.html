@@ -1,0 +1,29 @@
+<app-shell>
+  <div class="xanhla-container" style="padding:64px max(24px,4vw)">
+    <div style="max-width:600px;margin:0 auto;background:#fff;padding:40px;border-radius:var(--xanh-radius-md);border:1px solid var(--xanh-line)">
+      <h1 style="font-family:var(--xanh-font-display);font-size:28px;margin:0 0 12px 0">Theo dõi đơn hàng</h1>
+      <p style="color:var(--xanh-muted);font-size:15px;margin-bottom:24px">
+        Nhập mã đơn hàng của bạn (ví dụ: XL-123456) để kiểm tra trạng thái đóng gói và vận chuyển.
+      </p>
+
+      <form (submit)="handleSubmit($event)" style="display:flex;gap:10px;margin-bottom:24px">
+        <input type="text" placeholder="Nhập mã đơn hàng..." [value]="code()"
+               (input)="code.set($any($event.target).value)" required
+               style="flex:1;padding:12px 16px;border:1px solid var(--xanh-line);border-radius:var(--xanh-radius-sm)" />
+        <button class="xanhla-btn-primary" type="submit">Tra cứu</button>
+      </form>
+
+      @if (tracked()) {
+        <div style="padding:20px;background:var(--xanh-paper-deep);border-radius:var(--xanh-radius-sm);border:1px solid var(--xanh-line)">
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+            <strong>Đơn hàng: {{ code().toUpperCase() }}</strong>
+            <span style="color:#2b8a3e;font-weight:600">Đang chuẩn bị</span>
+          </div>
+          <p style="font-size:14px;color:var(--xanh-muted);margin:0">
+            Các loại rau củ và thực phẩm tươi sống đang được thu hoạch và đóng gói bảo quản lạnh. Dự kiến giao trong ngày.
+          </p>
+        </div>
+      }
+    </div>
+  </div>
+</app-shell>

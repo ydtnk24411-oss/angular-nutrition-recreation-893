@@ -1,0 +1,59 @@
+<app-shell>
+  <div class="xanhla-container" style="padding:40px max(24px,4vw)">
+    <div class="xanhla-ordering-banner">
+      <div class="xanhla-ordering-status-badge">
+        <span class="xanhla-green-dot"></span><span>Đang chấp nhận đơn hàng</span>
+      </div>
+      <h1 style="font-family:var(--xanh-font-display);font-size:36px;margin:0 0 8px 0">Đặt hàng trực tuyến</h1>
+      <p style="color:var(--xanh-muted);font-size:16px;margin:0 0 24px 0">Bạn có thể đặt hàng trực tuyến! Xem qua các món trong thực đơn và chọn món bạn muốn gọi.</p>
+
+      <div class="xanhla-fulfillment-tabs">
+        <button class="xanhla-fulfillment-tab" [class.is-active]="fulfillment() === 'pickup'" type="button" (click)="fulfillment.set('pickup')">Đến lấy</button>
+        <button class="xanhla-fulfillment-tab" [class.is-active]="fulfillment() === 'delivery'" type="button" (click)="fulfillment.set('delivery')">Giao hàng</button>
+      </div>
+
+      <div class="xanhla-fulfillment-info">
+        @if (fulfillment() === 'pickup') {
+          <span><strong>Thời gian đến lấy:</strong> Tối đa 30 phút</span>
+          <span><strong>Địa chỉ:</strong> 500 Terry Francine Street, San Francisco, CA 94158</span>
+        } @else {
+          <span><strong>Thời gian giao hàng:</strong> Trong ngày hôm nay</span>
+          <span><strong>Địa chỉ giao hàng:</strong> Nhập địa chỉ ở bước thanh toán</span>
+        }
+      </div>
+    </div>
+
+    <div class="xanhla-order-nav-bar">
+      @for (sec of sections; track sec.title) {
+        <span class="xanhla-order-nav-item" [class.is-active]="activeSection() === sec.title"
+              (click)="scrollTo(sec.title)">{{ sec.title }}</span>
+      }
+    </div>
+
+    @for (sec of sections; track sec.title) {
+      <div class="xanhla-order-section" [id]="sec.title">
+        <h3>{{ sec.title }}</h3>
+        <div class="xanhla-shop-grid">
+          @for (prod of sec.items; track prod.id) {
+            <div class="xanhla-prod-card">
+              <div class="xanhla-prod-card-img"><img [src]="prod.image" [alt]="prod.name" /></div>
+              <div class="xanhla-prod-card-body">
+                <div class="xanhla-prod-card-name">{{ prod.name }}</div>
+                <p style="font-size:13px;color:var(--xanh-muted);margin-bottom:12px;min-height:38px">{{ prod.description }}</p>
+                <div class="xanhla-prod-card-price">{{ prod.price }}</div>
+                <button class="xanhla-btn-primary" type="button" style="margin-top:auto;padding:8px 16px;font-size:14px"
+                        (click)="addToCart(prod)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                  </svg>
+                  Thêm vào đơn
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</app-shell>

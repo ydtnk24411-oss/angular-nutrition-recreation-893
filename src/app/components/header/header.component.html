@@ -1,0 +1,90 @@
+<!-- Top Banner -->
+<div class="xanhla-wix-bar">
+  <span>Được xây dựng trên <a href="https://wixharmony.com" target="_blank" rel="noreferrer">Wix Harmony</a></span>
+</div>
+
+<!-- Main Header -->
+<header class="xanhla-header">
+  <a class="xanhla-logo" routerLink="/" aria-label="Xanh Lá - Trang chủ">
+    <img [src]="logoImage" alt="Xanh Lá" />
+  </a>
+
+  <nav class="xanhla-nav" aria-label="Điều hướng chính">
+    @for (item of navItems; track item.path + $index) {
+      <a [routerLink]="item.path" [class.is-active]="isActive(item.path)">{{ item.label }}</a>
+    }
+  </nav>
+
+  <div class="xanhla-header-actions">
+    <!-- Member Login / Profile -->
+    @if (cart.currentUser()) {
+      <div style="position:relative">
+        <button class="xanhla-member-bar" type="button" (click)="toggleUserMenu()">
+          <div class="xanhla-member-avatar">{{ cart.currentUser()!.name.charAt(0).toUpperCase() }}</div>
+          <span>{{ cart.currentUser()!.name }}</span>
+        </button>
+        @if (userMenuOpen()) {
+          <div class="xanhla-user-menu">
+            <div class="xanhla-user-menu-header">
+              <strong>{{ cart.currentUser()!.name }}</strong>
+              <span>{{ cart.currentUser()!.email }}</span>
+            </div>
+            <a routerLink="/online-ordering" (click)="closeUserMenu()">Đơn hàng của tôi</a>
+            <a routerLink="/book-online" (click)="closeUserMenu()">Lịch hẹn của tôi</a>
+            <button type="button" (click)="logout()">Đăng xuất</button>
+          </div>
+        }
+      </div>
+    } @else {
+      <button class="xanhla-member-bar" type="button" (click)="cart.openAuthModal('login')">
+        <div class="xanhla-member-avatar-placeholder">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <span>Log In</span>
+      </button>
+    }
+
+    <!-- Cart Icon -->
+    <button class="xanhla-cart-button" type="button" aria-label="Xem giỏ hàng" (click)="cart.openCartDrawer()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 0 1-8 0"/>
+      </svg>
+      @if (cart.itemCount() > 0) {
+        <span class="xanhla-cart-badge">{{ cart.itemCount() }}</span>
+      }
+    </button>
+
+    <!-- Mobile Toggle -->
+    <button class="xanhla-mobile-toggle" type="button" aria-label="Mở menu" (click)="toggleMobileMenu()">
+      @if (mobileMenuOpen()) {
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      } @else {
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      }
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Drawer -->
+@if (mobileMenuOpen()) {
+  <div class="xanhla-drawer-backdrop" (click)="closeMobileMenu()">
+    <div class="xanhla-cart-drawer" style="width:300px" (click)="$event.stopPropagation()">
+      <div class="xanhla-drawer-header">
+        <h3>Menu</h3>
+        <button class="xanhla-drawer-close" type="button" (click)="closeMobileMenu()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="xanhla-drawer-body">
+        @for (item of navItems; track item.path + $index) {
+          <a [routerLink]="item.path"
+             style="padding:12px 0;font-size:17px;font-weight:600;border-bottom:1px solid var(--xanh-line)"
+             (click)="closeMobileMenu()">{{ item.label }}</a>
+        }
+      </div>
+    </div>
+  </div>
+}

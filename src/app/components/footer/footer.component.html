@@ -1,0 +1,41 @@
+<footer class="xanhla-footer" id="footer">
+  <div class="xanhla-container">
+    <div class="xanhla-footer-main">
+      <div class="xanhla-footer-brand">
+        <a class="xanhla-logo" routerLink="/">
+          <img [src]="logoImage" alt="Xanh Lá" />
+        </a>
+        <p>Thực phẩm tươi cho bữa ăn tốt hơn</p>
+        <a href="mailto:hello@xanhla.farm">hello&#64;xanhla.farm</a>
+      </div>
+
+      <div class="xanhla-footer-newsletter">
+        <h4>Đăng ký nhận thông tin từ Xanh Lá</h4>
+        <form class="xanhla-newsletter-form" (submit)="handleSubscribe($event)">
+          <input
+            type="email"
+            placeholder="Địa chỉ email"
+            [value]="email()"
+            (input)="email.set($any($event.target).value)"
+            required
+          />
+          <button type="submit" aria-label="Gửi đăng ký">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </button>
+        </form>
+        @if (subscribed()) {
+          <p style="color:var(--xanh-moss);font-size:14px;margin-top:8px">
+            Cảm ơn bạn đã đăng ký nhận thông tin từ Xanh Lá!
+          </p>
+        }
+      </div>
+    </div>
+
+    <div class="xanhla-footer-bottom">
+      <span>© 2026 Xanh Lá. Bảo lưu mọi quyền.</span>
+      <span>Thực phẩm tươi sống &amp; nguyên liệu chưa chế biến</span>
+    </div>
+  </div>
+</footer>
