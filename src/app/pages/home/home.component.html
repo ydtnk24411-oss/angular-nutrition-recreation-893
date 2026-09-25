@@ -39,19 +39,24 @@
             </div>
           </div>
         </div>
-        <div class="xanhla-carousel-wrap">
-          <div class="xanhla-carousel-track" [style.transform]="carouselTransform">
-            @for (prod of products; track prod.id) {
-              <a class="xanhla-prod-card" [routerLink]="prod.slug">
-                <div class="xanhla-prod-card-img"><img [src]="prod.image" [alt]="prod.name" /></div>
-                <div class="xanhla-prod-card-body">
-                  <div class="xanhla-prod-card-name">{{ prod.name }}</div>
-                  <div class="xanhla-prod-card-price">Giá {{ prod.price }}</div>
-                </div>
-              </a>
-            }
+
+        @if (loadingProds()) {
+          <div style="text-align:center;padding:48px 0;color:var(--xanh-muted)">Đang tải sản phẩm...</div>
+        } @else {
+          <div class="xanhla-carousel-wrap">
+            <div class="xanhla-carousel-track" [style.transform]="carouselTransform">
+              @for (prod of apiProducts(); track prod._id) {
+                <a class="xanhla-prod-card" [routerLink]="productSlug(prod)">
+                  <div class="xanhla-prod-card-img"><img [src]="prod.image" [alt]="prod.name" /></div>
+                  <div class="xanhla-prod-card-body">
+                    <div class="xanhla-prod-card-name">{{ prod.name }}</div>
+                    <div class="xanhla-prod-card-price">Giá {{ prod.price }}</div>
+                  </div>
+                </a>
+              }
+            </div>
           </div>
-        </div>
+        }
       </div>
     </section>
 

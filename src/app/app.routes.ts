@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
+import { adminGuard } from './shared/guards/admin.guard';
 
 export const routes: Routes = [
+  // ── Public storefront routes ──────────────────────────────────
   {
     path: '',
     loadComponent: () =>
@@ -72,8 +74,53 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/tracker/tracker.component').then((m) => m.TrackerComponent),
   },
+
+  // ── Admin routes ──────────────────────────────────────────────
   {
-    path: '**',
-    redirectTo: '',
+    path: 'admin/login',
+    loadComponent: () =>
+      import('./admin/login/login.component').then((m) => m.AdminLoginComponent),
   },
+  {
+    path: 'admin',
+    loadComponent: () =>
+      import('./admin/layout/admin-layout.component').then((m) => m.AdminLayoutComponent),
+    canActivate: [adminGuard],
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./admin/dashboard/dashboard.component').then((m) => m.AdminDashboardComponent),
+      },
+      {
+        path: 'products',
+        loadComponent: () =>
+          import('./admin/products/products.component').then((m) => m.AdminProductsComponent),
+      },
+      {
+        path: 'orders',
+        loadComponent: () =>
+          import('./admin/orders/orders.component').then((m) => m.AdminOrdersComponent),
+      },
+      {
+        path: 'users',
+        loadComponent: () =>
+          import('./admin/users/users.component').then((m) => m.AdminUsersComponent),
+      },
+      {
+        path: 'events',
+        loadComponent: () =>
+          import('./admin/events/events.component').then((m) => m.AdminEventsComponent),
+      },
+      {
+        path: 'bookings',
+        loadComponent: () =>
+          import('./admin/bookings/bookings.component').then((m) => m.AdminBookingsComponent),
+      },
+    ],
+  },
+
+  // ── Fallback ──────────────────────────────────────────────────
+  { path: '**', redirectTo: '' },
 ];

@@ -1,0 +1,69 @@
+<div class="admin-shell" [class.sidebar-collapsed]="!sidebarOpen()">
+
+  <!-- ── Sidebar ──────────────────────────────────────── -->
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-header">
+      <span class="admin-sidebar-logo">🌿</span>
+      @if (sidebarOpen()) {
+        <span class="admin-sidebar-brand">Xanh Lá</span>
+      }
+    </div>
+
+    <nav class="admin-sidebar-nav">
+      @for (item of navItems; track item.path) {
+        <a
+          [routerLink]="item.path"
+          routerLinkActive="is-active"
+          class="admin-nav-item"
+          [title]="item.label"
+        >
+          <span class="admin-nav-icon">{{ item.icon }}</span>
+          @if (sidebarOpen()) {
+            <span class="admin-nav-label">{{ item.label }}</span>
+          }
+        </a>
+      }
+    </nav>
+
+    <div class="admin-sidebar-footer">
+      <button class="admin-nav-item admin-logout-btn" (click)="logout()" title="Đăng xuất">
+        <span class="admin-nav-icon">🚪</span>
+        @if (sidebarOpen()) {
+          <span class="admin-nav-label">Đăng xuất</span>
+        }
+      </button>
+    </div>
+  </aside>
+
+  <!-- ── Main ─────────────────────────────────────────── -->
+  <div class="admin-main">
+
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <button class="admin-toggle-btn" type="button" (click)="toggleSidebar()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="6"  x2="21" y2="6"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+
+      <div class="admin-topbar-title">
+        Quản trị hệ thống — Xanh Lá
+      </div>
+
+      <div class="admin-topbar-user">
+        <div class="admin-user-avatar">
+          {{ auth.user()?.name?.charAt(0)?.toUpperCase() ?? 'A' }}
+        </div>
+        <span class="admin-user-name">{{ auth.user()?.name ?? 'Admin' }}</span>
+      </div>
+    </header>
+
+    <!-- Page content -->
+    <main class="admin-content">
+      <router-outlet />
+    </main>
+  </div>
+</div>

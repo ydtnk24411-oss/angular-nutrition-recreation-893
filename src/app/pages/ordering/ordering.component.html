@@ -24,17 +24,24 @@
     </div>
 
     <div class="xanhla-order-nav-bar">
-      @for (sec of sections; track sec.title) {
+      @for (sec of sections(); track sec.title) {
         <span class="xanhla-order-nav-item" [class.is-active]="activeSection() === sec.title"
               (click)="scrollTo(sec.title)">{{ sec.title }}</span>
       }
     </div>
 
-    @for (sec of sections; track sec.title) {
+    @if (loading()) {
+      <div style="text-align:center;padding:48px 0;color:var(--xanh-muted)">Đang tải sản phẩm...</div>
+    }
+    @if (error()) {
+      <div style="text-align:center;padding:24px;color:#c53030">{{ error() }}</div>
+    }
+
+    @for (sec of sections(); track sec.title) {
       <div class="xanhla-order-section" [id]="sec.title">
         <h3>{{ sec.title }}</h3>
         <div class="xanhla-shop-grid">
-          @for (prod of sec.items; track prod.id) {
+          @for (prod of sec.items; track prod._id) {
             <div class="xanhla-prod-card">
               <div class="xanhla-prod-card-img"><img [src]="prod.image" [alt]="prod.name" /></div>
               <div class="xanhla-prod-card-body">

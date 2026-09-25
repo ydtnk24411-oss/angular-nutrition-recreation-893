@@ -1,4 +1,8 @@
 import {
+  DOCUMENT,
+  isPlatformBrowser
+} from "./chunk-H3TZHIZA.js";
+import {
   ApplicationRef,
   Attribute,
   ChangeDetectorRef,
@@ -27,13 +31,9 @@ import {
   Renderer2,
   RendererStyleFlags2,
   RuntimeError,
-  Subject,
   TemplateRef,
   Version,
   ViewContainerRef,
-  __async,
-  __spreadProps,
-  __spreadValues,
   booleanAttribute,
   createNgModule,
   findLocaleData,
@@ -60,12 +60,15 @@ import {
   ɵɵinject,
   ɵɵinjectAttribute,
   ɵɵstyleProp
-} from "./chunk-HTM77VD3.js";
+} from "./chunk-GITBG775.js";
+import {
+  Subject,
+  __async,
+  __spreadProps,
+  __spreadValues
+} from "./chunk-MORDZ4PF.js";
 
-// node_modules/.pnpm/@angular+common@19.2.25_@an_e41d915ece4b9f4c3cbca7b56243a109/node_modules/@angular/common/fesm2022/dom_tokens-rA0ACyx7.mjs
-var DOCUMENT = new InjectionToken(ngDevMode ? "DocumentToken" : "");
-
-// node_modules/.pnpm/@angular+common@19.2.25_@an_e41d915ece4b9f4c3cbca7b56243a109/node_modules/@angular/common/fesm2022/location-Dq4mJT-A.mjs
+// ../node_modules/.pnpm/@angular+common@19.2.25_@an_e41d915ece4b9f4c3cbca7b56243a109/node_modules/@angular/common/fesm2022/location-Dq4mJT-A.mjs
 var _DOM = null;
 function getDOM() {
   return _DOM;
@@ -552,7 +555,7 @@ function _stripOrigin(baseHref) {
   return baseHref;
 }
 
-// node_modules/.pnpm/@angular+common@19.2.25_@an_e41d915ece4b9f4c3cbca7b56243a109/node_modules/@angular/common/fesm2022/common_module-8OBsKodd.mjs
+// ../node_modules/.pnpm/@angular+common@19.2.25_@an_e41d915ece4b9f4c3cbca7b56243a109/node_modules/@angular/common/fesm2022/common_module-8OBsKodd.mjs
 var HashLocationStrategy = class _HashLocationStrategy extends LocationStrategy {
   _platformLocation;
   _baseHref = "";
@@ -3660,30 +3663,7 @@ var CommonModule = class _CommonModule {
   }], null, null);
 })();
 
-// node_modules/.pnpm/@angular+common@19.2.25_@an_e41d915ece4b9f4c3cbca7b56243a109/node_modules/@angular/common/fesm2022/xhr-BfNfxNDv.mjs
-function parseCookieValue(cookieStr, name) {
-  name = encodeURIComponent(name);
-  for (const cookie of cookieStr.split(";")) {
-    const eqIndex = cookie.indexOf("=");
-    const [cookieName, cookieValue] = eqIndex == -1 ? [cookie, ""] : [cookie.slice(0, eqIndex), cookie.slice(eqIndex + 1)];
-    if (cookieName.trim() === name) {
-      return decodeURIComponent(cookieValue);
-    }
-  }
-  return null;
-}
-var PLATFORM_BROWSER_ID = "browser";
-var PLATFORM_SERVER_ID = "server";
-function isPlatformBrowser(platformId) {
-  return platformId === PLATFORM_BROWSER_ID;
-}
-function isPlatformServer(platformId) {
-  return platformId === PLATFORM_SERVER_ID;
-}
-var XhrFactory = class {
-};
-
-// node_modules/.pnpm/@angular+common@19.2.25_@an_e41d915ece4b9f4c3cbca7b56243a109/node_modules/@angular/common/fesm2022/platform_navigation-B45Jeakb.mjs
+// ../node_modules/.pnpm/@angular+common@19.2.25_@an_e41d915ece4b9f4c3cbca7b56243a109/node_modules/@angular/common/fesm2022/platform_navigation-B45Jeakb.mjs
 var PlatformNavigation = class _PlatformNavigation {
   static ɵfac = function PlatformNavigation_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _PlatformNavigation)();
@@ -3704,7 +3684,7 @@ var PlatformNavigation = class _PlatformNavigation {
   }], null, null);
 })();
 
-// node_modules/.pnpm/@angular+common@19.2.25_@an_e41d915ece4b9f4c3cbca7b56243a109/node_modules/@angular/common/fesm2022/common.mjs
+// ../node_modules/.pnpm/@angular+common@19.2.25_@an_e41d915ece4b9f4c3cbca7b56243a109/node_modules/@angular/common/fesm2022/common.mjs
 function registerLocaleData2(data, localeId, extraData) {
   return registerLocaleData(data, localeId, extraData);
 }
@@ -5046,7 +5026,6 @@ function booleanOrUrlAttribute(value) {
 }
 
 export {
-  DOCUMENT,
   getDOM,
   setRootDomAdapter,
   DomAdapter,
@@ -5122,12 +5101,6 @@ export {
   CurrencyPipe,
   SlicePipe,
   CommonModule,
-  parseCookieValue,
-  PLATFORM_BROWSER_ID,
-  PLATFORM_SERVER_ID,
-  isPlatformBrowser,
-  isPlatformServer,
-  XhrFactory,
   PlatformNavigation,
   registerLocaleData2 as registerLocaleData,
   VERSION,
@@ -5144,10 +5117,8 @@ export {
 };
 /*! Bundled license information:
 
-@angular/common/fesm2022/dom_tokens-rA0ACyx7.mjs:
 @angular/common/fesm2022/location-Dq4mJT-A.mjs:
 @angular/common/fesm2022/common_module-8OBsKodd.mjs:
-@angular/common/fesm2022/xhr-BfNfxNDv.mjs:
 @angular/common/fesm2022/platform_navigation-B45Jeakb.mjs:
 @angular/common/fesm2022/common.mjs:
   (**
@@ -5156,4 +5127,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-2TDCZJWG.js.map
+//# sourceMappingURL=chunk-XWTAIS56.js.map

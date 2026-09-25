@@ -100,13 +100,13 @@
           </div>
         } @else {
           <div class="xanhla-shop-grid">
-            @for (prod of filteredProducts(); track prod.id) {
+            @for (prod of filteredProducts(); track prod._id) {
               <article class="xanhla-prod-card">
-                <a class="xanhla-prod-card-img" [routerLink]="prod.slug">
+                <a class="xanhla-prod-card-img" [routerLink]="productSlug(prod)">
                   <img [src]="prod.image" [alt]="prod.name" />
                 </a>
                 <div class="xanhla-prod-card-body">
-                  <a [routerLink]="prod.slug" class="xanhla-prod-card-name">{{ prod.name }}</a>
+                  <a [routerLink]="productSlug(prod)" class="xanhla-prod-card-name">{{ prod.name }}</a>
                   <div class="xanhla-prod-card-price">Giá {{ prod.price }}</div>
                   <button class="xanhla-btn-primary" type="button"
                           style="margin-top:auto;padding:8px 16px;font-size:14px"
